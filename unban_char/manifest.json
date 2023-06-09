@@ -2,19 +2,19 @@
 	"name": "Unban Character",
 	"version": "1.0.2",
 	"date": "2023-06-09",
-	"description": "آزاد سازی هیرو های بن شده",
+	"description": "UnBan Banned characters",
 	"author": {
 		"name": "Shayan_077",
-		"website": "http://www.yekta-core.ir"
+		"website": "http://www.demacian.ir"
 	},
 	
 	"permissions": {
-		"view": {"default" : true, "description": "مشاهده صفحه هیرو های بن شده" }
+		"view": {"default" : true, "description": "View the Banned characters page" }
 	},
 
 	"roles": {
 		"view": {
-			"description": "مشاهده ماژول هیرو های بن شده",
+			"description": "View the Banned characters",
 			
 			"permissions": {
 				"view": true
