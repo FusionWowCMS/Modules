@@ -1,0 +1,24 @@
+{
+	"name": "Characters Level UP",
+	"description": "Characters Level UP",
+	"author": {
+		"name": "Shayan",
+		"website": "http://www.Demacian.ir"
+	},
+	
+	"permissions": {
+		"view": {"default" : true, "description": "Show Page Characters Level UP" }
+	},
+
+	"roles": {
+		"view": {
+			"description": "Show  Characters Level UP",
+			
+			"permissions": {
+				"view": true
+			}
+		}
+	},
+
+	"enabled": true
+}
