@@ -1,0 +1,61 @@
+{
+	"name": "Gold to dp",
+	"description": "Lets your users purchase ingame Gold to dp",
+	"version": "1.0.0",
+	"date": "2023-06-10",
+	"author": {
+	"name": "Shayan",
+	"website": "http:\/\/Demacian.ir"
+	},
+
+	"permissions": {
+		"view": {"default" : true, "description": "View the Gold  to dp screen." },
+		"canViewOrders": {"default": false, "description": "View Gold  to dp orders" },
+		"canRefundOrders": {"default": false, "description": "Refund failed orders" },
+		"canViewItems": {"default": false, "description": "View Gold  to dp" },
+		"canAddItems": {"default": false, "description": "Add Gold  to dp" },
+		"canRemoveItems": {"default": false, "description": "Remove Gold  to dp" },
+		"canEditItems": {"default": false, "description": "Edit Gold  to dp" },
+		"canAddGroups": {"default": false, "description": "Add Gold  to dp" },
+		"canRemoveGroups": {"default": false, "description": "Remove Gold  to dp" },
+		"canEditGroups": {"default": false, "description": "Edit Gold  to dp" }
+	},
+
+	"roles": {
+		"view": {
+			"description": "View the Gold  to dp",
+
+			"permissions": {
+				"view": true
+			}
+		},
+
+		"moderate": {
+			"description": "Manage the Gold  to dp. <font style='color:red;'>Admin-tool</font>",
+			"dangerLevel": 1,
+
+			"permissions": {
+				"canViewOrders": true,
+				"canRefundOrders": true
+			}
+		},
+
+		"manage": {
+			"description": "Manage the Gold  to dp. <font style='color:red;'>Admin-tool</font>",
+			"dangerLevel": 2,
+
+			"permissions": {
+				"canViewItems": true,
+				"canAddItems": true,
+				"canRemoveItems": true,
+				"canEditItems": true,
+				"canAddGroups": true,
+				"canEditGroups": true,
+				"canRemoveGroups": true
+			}
+		}
+	},
+
+
+	"enabled": true
+}
