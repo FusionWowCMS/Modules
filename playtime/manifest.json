@@ -1,0 +1,24 @@
+{
+	"name": "Convert Play Time To Item & DP ",
+	"description": "Converting the player's online time to DP & Item",
+	"author": {
+		"name": "Shayan",
+		"website": "http://www.demacian.ir"
+	},
+	
+	"permissions": {
+		"view": {"default" : true, "description": "Converting the player's online time to DP & Item" }
+	},
+
+	"roles": {
+		"view": {
+			"description": "Converting the player's online time to DP & Item",
+			
+			"permissions": {
+				"view": true
+			}
+		}
+	},
+
+	"enabled": true
+}
