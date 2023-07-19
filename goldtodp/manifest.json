@@ -1,11 +1,9 @@
 {
 	"name": "Gold to dp",
 	"description": "Lets your users purchase ingame Gold to dp",
-	"version": "1.0.0",
-	"date": "2023-06-10",
 	"author": {
-	"name": "Shayan",
-	"website": "http:\/\/Demacian.ir"
+		"name": "Demacian",
+		"website": "http:\/\/Demacian.ir"
 	},
 
 	"permissions": {

@@ -9,9 +9,6 @@ $config['calc'] = 4 ;
 $config['cta_language'] = array(
 
 'TITLE'		  => 'Gold Character To DP',
-'TITLE2'		  => ' - Seclect Item ',
-'DESCRIPTION'	  => 'With this service, it is possible to buy and sell characters',
-
 'DP'		  => 'DP',
 'VP'		  => 'VP',
 'COST_EXPL'	  => ' Transfer costs <strong>[PRICE] [CURRENCY]</strong>',
@@ -31,25 +28,13 @@ $config['cta_language'] = array(
 'LINK_GO_UCP'	  => 'Go to the user control panel ',
 'realm_name' => ' Realm Name : ',
 'no_chars' => 'You do not have character',
-'no_items' => 'You do not have character items trade',
-'sellmyitem' => 'Sell my item',
 'back' => 'Back',
-'Total' =>  'Total Characters Items',
+
 'char_name' => 'Charcater Name : ',
-'Selectmyitem' => 'Select Item Sell',
+
 'Fee' => 'Server Fee ',
 'convert' => 'conversion',
-'ok_trade' => 'Your item has been successfully transferred to the store If your item is removed from the game, the item will be removed from the store',
-
-
-
 'BANNED_MSG'	=> 'Your account is blocked',
-
-
-
-
-
-
 
 
 );

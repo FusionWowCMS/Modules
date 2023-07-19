@@ -205,6 +205,7 @@ class Levelup extends MX_Controller
 		switch ($this->getEmulatorString($realmId))
 		{
 			case "trinity":
+			case "azerothcore":
                 return ".char level " . $CharacterName." 80";
 			case "trinity_cata":
                 return ".char level " . $CharacterName." 85";

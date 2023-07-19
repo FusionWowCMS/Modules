@@ -1,6 +1,6 @@
 {
-	"name": "Characters Level UP",
-	"description": "Characters Level UP",
+	"name": "Level UP",
+	"description": "Level UP",
 	"version": "1.0.2",
 	"date": "2023-06-09",
 	"author": {
@@ -9,12 +9,12 @@
 	},
 	
 	"permissions": {
-		"view": {"default" : true, "description": "Show Page Characters Level UP" }
+		"view": {"default" : true, "description": "Show Page Level UP" }
 	},
 
 	"roles": {
 		"view": {
-			"description": "Show  Characters Level UP",
+			"description": "Show Level UP",
 			
 			"permissions": {
 				"view": true

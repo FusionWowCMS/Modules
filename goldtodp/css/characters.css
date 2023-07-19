@@ -188,14 +188,6 @@
 	opacity:1;
 }
 
-.teleport_realm_divider {
-	margin-top:10px;
-	margin-bottom:5px;
-	font-weight:bold;
-	font-size:10px;
-	opacity:0.5;
-}
-
 .active_tool {
 	opacity: 1 !important;
 	}

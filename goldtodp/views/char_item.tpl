@@ -28,9 +28,9 @@
 					</div>			
                 </center>
 
-{foreach from=$result->data_model->GetAccChar($realm->getId()) item=character}
+                         {foreach from=$result->data_model->GetAccChar($realm->getId()) item=character}
             
-				<div class="select_character" >
+				  <div class="select_character" >
 					 <div class="character store_item">
 					
 					
@@ -46,8 +46,10 @@
 							
 								 <a href="javascript:void(0)" class="nice_button" onClick="CharacterClass.selectCharacter(this, {$realm->getId()},'{$character.guid}','{$character.name}','{$result->data_model->Calculate_money({$result->data_model->getmoneychar($realm->getId(),{$character.guid})})}')">
 								     
-                  	 Select	 	 </a>
-                    {/if}
+                  	               Select	 	 
+							
+							     </a>
+                         {/if}
 					             
 					   	</section>	
 	
@@ -115,13 +117,7 @@
              </td>
              
                      <div id="cost2"><img src="{$url}application/images/icons/coins_add.png" align="absmiddle" height="12" width="12"/> DP 0 </div>  
-        
-         
-            
 
-             
-
-            
              
              
    </tr>
@@ -131,12 +127,6 @@
    
     <tr>
                    
-                        
-                       
-                        
-            
-    
-                    
 
                     
                     <div class="clear"></div>
