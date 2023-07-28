@@ -3,10 +3,6 @@
 	private $characters;
 	private $total;
 	
-	/*
-		Define our tools
-	*/
- 
 
 	public function __construct()
 	{
@@ -14,20 +10,11 @@
 
 		$this->user->userArea();
 		
-		$this->load->config('myconfig');
-
+		$this->load->config('config');
 
         $this->init(); 
 
-  
-
-		//Init the variables
-		
 	}
-
-	/**
-	 * Init every variable
-	 */
 	private function init()
 	{
 		$this->characters = $this->user->getCharacters($this->user->getId());
@@ -54,9 +41,6 @@
 		}
 	}
 	
-	/**
-	 * Load the page
-	 */
 	public function index()
 	{
 		requirePermission("view");
@@ -99,9 +83,6 @@
 		$this->template->view($page, "modules/unban_char/css/unban.css", "modules/unban_char/js/unban.js");
 	}
 	
-	/**
-	 * Submit method
-	 */
 	public function submit()
 	{
 		//Get the post variables
@@ -112,7 +93,7 @@
 		// Make sure the realm actually supports console commands
 		if (!$this->realms->getRealm($realmId)->getEmulator()->hasConsole())
 		{
-			die("the realm actually supports console commands");
+				die(long("relamdoesnotsupport","unban_char"));
 		}
 		
 		if ( $characterGuid && $realmId)
@@ -128,13 +109,13 @@
 				// Make sure the character exists
 				if (!$realmConnection->characterExists($characterGuid))
 				{
-					die("There is no character");
+						die(long("noselectedcharacter","unban_char"));
 				}
 
 			
 				if (!$realmConnection->characterBelongsToAccount($characterGuid, $this->user->getId()))
 				{
-					die("The character does not belong to this account");
+				die(long("notcharacteryouraccount","unban_char"));
 				}
 				
 				//Get the character name
@@ -143,7 +124,7 @@
 				//Make sure we've got the name
 				if (!$CharacterName)
 				{
-					die("The website was unable to resolve your character's name.");
+					die(long("unablecharactername","unban_char"));
 				}
 				
 				//Check if the user can afford the service
@@ -154,7 +135,7 @@
 					
 					if (!$command)
 					{
-						die("The server is currently unavailable");
+						die(long("cammandnoserver","unban_char"));
 					}
 					
 					//Execute the command
@@ -173,38 +154,28 @@
 				}
 				else 
 				{
-					die("Your account balance is not enough");
+					die(long("notenough","unban_char"));
 				}
-					
-					
-			
-			
 		}
 		else
 		{
-			die("Data is not valid for operations");
+			die(long("Theinputisinvalid","unban_char"));
 		}
 	}
 	
-	private function GetCommand ($realmId, $CharacterName)
-	{
-		//Start by switching the tool id
-		
-			
+	private function GetCommand ($realmId, $CharacterName){
+
 		 	return $this->GetUnbanCommand($realmId, $CharacterName);
-	
-		
 	}
 	
-	
-	
-
 	private function GetUnbanCommand($realmId, $CharacterName)
 	{
 		switch ($this->getEmulatorString($realmId))
 		{
 			case "trinity":
+			case "azerothcore":
 			case "trinity_cata":
+				
 			    
 				return ".unban character " . $CharacterName;
 		}
@@ -216,9 +187,6 @@
 	{
 		return str_replace(array('_ra', '_soap', '_rbac'), '', $this->realms->getRealm($realmId)->getConfig('emulator'));
 	}
-
-
-
 	public function character_banned($realmId =1)
 	{
 		//Connect to the character database		
@@ -244,7 +212,5 @@
 	  
 
 	}
-
-	
-          
+     
  }

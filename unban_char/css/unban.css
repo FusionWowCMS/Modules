@@ -1,5 +1,4 @@
 #character_tools {
-	
 
 }
 
@@ -11,17 +10,9 @@
 	margin-top:5px;
 }
 
-#gold {
-	
-
-	
-}
 
 #select_tool {
 	
-	
-/*	margin-left:10px;
-	margin-right:20px; */
 	margin-top:5px;
 }
 
@@ -82,9 +73,7 @@
 
 .char, .tools {
 	padding:14px;
-   
 
-	
 }
 
 .character img, .tool img {

@@ -16,10 +16,6 @@
 		initializeUnban();
 	});
 </script>
-   
-
-
-
      <center>
           <div style="padding: 8px 35px 8px 14px; margin-bottom: 20px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); background-color: #131b10; border: 1px solid #FF006A; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;">
                <div style="text-align: right;"><span style="color: blue;"><span style="font-family: tahoma,geneva,sans-serif;"><span style="font-size: 12px;"></span></span></span>
@@ -35,7 +31,6 @@
                             {else}
 	                             {lang("free", "unban_char")}
                             {/if}  
-    
               </div>
 		</div>
     </center>      
@@ -52,7 +47,7 @@
 						<div class="character store_item">
 							<section class="character_buttons">
 								<a href="javascript:void(0)" class="nice_button" onClick="Unban.selectCharacter(this, {$realm.realmId}, {$character.guid}, '{$character.name}')">
-								Select
+								 {lang("Select", "unban_char")}
 								</a>
 							</section>
 			
@@ -61,16 +56,14 @@
 							<a class="character_name" data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">{$character.name}</a>
 							
                             
-                           <div style="margin-top: -22px;margin-left:60px">  Level {$character.level}</div>   
+                           <div style="margin-top: -22px;margin-left:60px">   {lang("Level", "unban_char")} {$character.level}</div>   
 							<div class="clear"></div>
 						</div>
-					</div>
-                  
-                   
+					</div>    
 				{/foreach}
 			{/foreach}
 		{else}
-			<center style="padding-top:10px;"><b>No found character</b></center>
+			<center style="padding-top:10px;"><b>{lang("no_chars", "unban_char")}</b></center>
 		{/if}
 	</section>
     
@@ -83,21 +76,16 @@
             <div class="select_tool">
                 <div class="tool store_item">
                     <section class="tool_buttons">
-                        <a href="javascript:void(0)" class="nice_button" onClick="Unban.Purchase(this)">
-                             Unban
+                        <a href="javascript:void(0)" class="nice_button" onClick="Unban.UNban(this)">
+                             {lang("UnBan", "unban_char")}
                         </a>
                     </section>
     
                     <div class="clear"></div>
                 </div>
             </div>
-            
-   
         </div>
 		<div class="clear"></div>
-        
-	
-        
 	</section>
 
 	<div class="clear"></div>

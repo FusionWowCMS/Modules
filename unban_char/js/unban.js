@@ -44,8 +44,7 @@ var Unban = {
 	
 	
 	
-	Purchase: function(button)
-	{
+	UNban: function(button){
 		//Check if we're already executing a command
 		if (Unban.IsLoading)
 			return;
@@ -53,8 +52,7 @@ var Unban = {
       
 
 		//Check if we have selected character
-		if (Unban.Character.guid == null)
-		{
+		if (Unban.Character.guid == null){
 			Swal.fire({
 						icon:  'error',
 						title: 'Unban',
@@ -65,8 +63,6 @@ var Unban = {
 			return;
 		}
 			
-	
-
 	
 			$.ajax({
 			  	beforeSend: function(xhr)
@@ -88,6 +84,8 @@ var Unban = {
 			},
 			function(data)
 			{
+				Unban.IsLoading = false;
+				
 				if (data == 1)
 				{
 					
@@ -110,7 +108,6 @@ var Unban = {
 					})
 				}
 				
-				Unban.IsLoading = false;
 				$(".active_tool").find('.nice_button').html("Unban");
 				$(".active_tool").removeClass("active_tool");
 			});
