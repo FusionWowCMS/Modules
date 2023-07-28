@@ -1,14 +1,9 @@
 var Playtime = {
 
 
-
 	User: {
 
-
-
 		dp: null,
-
-
 
 		initialize: function(dp)
 
@@ -21,10 +16,7 @@ var Playtime = {
 	},
 
 
-
 	Character: {
-
-
 
 		name: null,
 
@@ -34,9 +26,7 @@ var Playtime = {
 
 
 
-		initialize: function(name, guid, realm)
-
-		{
+		initialize: function(name, guid, realm){
 
 			this.name = name;
 
@@ -48,23 +38,13 @@ var Playtime = {
 
 	},
 
-
-
-	selectCharacter: function(button, realm, guid, name)
-
-	{
+	selectCharacter: function(button, realm, guid, name){
 
 		var CharSection = $("#select_character");
 
-		
-
 		Playtime.Character.initialize(name, guid, realm);
 
-		
-
-		$(".item_group", CharSection).each(function()
-
-		{
+		$(".item_group", CharSection).each(function(){
 
 			$(this).removeClass("item_group").addClass("select_character");
 
@@ -73,70 +53,44 @@ var Playtime = {
 		});
 
 		
-
 		$(button).parents(".select_character").removeClass("select_character").addClass("item_group");
 
 		$(button).addClass("nice_active").html("Selected");
 
 	},
 
-	
 
 	IsLoading: false,
-
-	
-
-	
-
-	
 
 	Convert: function(button)
 
 	{
          var CanAfford = false;
-		//Check if we're already executing a command
-
+	
 		if (Playtime.IsLoading)
 
 			return;
 
-		
-
-
-		//Check if we have selected character
-
-		if (Playtime.Character.guid == null)
-
-		{
+		if (Playtime.Character.guid == null){
 			
 					Swal.fire({
 						icon:  'error',
 						title: 'Playtime',
 						text:  'Please select a character first',
 					});
-			
-
-		
 
 			return;
 
 		}
 
 
-			CanAfford = true;
+		CanAfford = true;
 
-	
-
-
-		if (CanAfford)
-
-		{
+		if (CanAfford){
 
 			$.ajax({
 
-			  	beforeSend: function(xhr)
-
-				{
+			  	beforeSend: function(xhr){
 
 					Playtime.IsLoading = true;
 
@@ -150,15 +104,7 @@ var Playtime = {
 
 			});
 
-		
-
-			// Execute the service
-
-			$.post(Config.URL + "playtime/submit", 
-
-			{
-
-				//id: ToolId, 
+			$.post(Config.URL + "playtime/submit", {
 
 
 				guid: Playtime.Character.guid, 
@@ -169,13 +115,11 @@ var Playtime = {
 
 			},
 
-			function(data)
-
-			{
-                       Playtime.IsLoading = false;
-				if (data == 1)
-
-				{
+			function(data){
+				
+                Playtime.IsLoading = false;
+				
+				if (data == 1){
 					
 					Swal.fire({
 						icon:  'seccess',
@@ -188,12 +132,8 @@ var Playtime = {
 
 				}
 
-				else
+				else{
 
-				{
-
-				
-					
 					Swal.fire({
 						icon:  'error',
 						title: 'Playtime',
@@ -203,14 +143,6 @@ var Playtime = {
 					 setTimeout ( "redirect('Playtime')", 1000 );	
 
 				}
-
-				
-
-				Playtime.IsLoading = false;
-
-				//$(".active_tool").find('.nice_button').html("Select");
-
-				//$(".active_tool").removeClass("active_tool");
 
 			});
 

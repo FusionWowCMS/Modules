@@ -2,23 +2,14 @@
 class Playtime extends MX_Controller 
 {
 	private $characters;
-	private $total;
 	
-	/*
-		Define our tools
-	*/
-	private $tools = array(
-		1 => "convert_time",
-		
-	);
-
 	public function __construct()
 	{
 		parent::__construct();
 
 		$this->user->userArea();
 		
-		$this->load->config('character_convert');
+		$this->load->config('config');
 
 		//Init the variables
 		$this->init();
@@ -61,8 +52,8 @@ class Playtime extends MX_Controller
 	{
 		requirePermission("view");
 		
-	     $realmId =   $this->config->item("realmId");
-		 $itemid = $this->config->item('itemid');
+	     $realmId    =   $this->config->item("realmId");
+		 $itemid     = $this->config->item('itemid');
 		 $item_count = $this->config->item('item_count');
 		
 		
@@ -81,15 +72,12 @@ class Playtime extends MX_Controller
 		
 		$page_content = $this->template->loadPage("playtime.tpl", $content_data);	
                             
-                 
-		                     	
-       
-       $this->template->setTitle("Convert Playtime to Item");        
+        $this->template->setTitle(long("TITLE","playtime"));        
 		//Load the page
 		$page_data = array(
-			"module" => "default", 
-			"headline" => "Convert Playtime to Item", 
-			"content" => $page_content
+			"module"   =>   "default", 
+			"headline" => long("TITLE","playtime"), 
+			"content"  => $page_content
 		);
 		
 		$page = $this->template->loadPage("page.tpl", $page_data);
@@ -97,26 +85,23 @@ class Playtime extends MX_Controller
 		$this->template->view($page, "modules/playtime/css/playtime.css", "modules/playtime/js/playtime.js");
 	}
 	
-	/**
-	 * Submit method
-	 */
+
 	public function submit()
 	{
-		//Get the post variables
-		//$ToolId = $this->input->post('id'); 
+		
 		$characterGuid = $this->input->post('guid'); 
-		$realmId = $this->input->post('realm'); 
+		$realmId       = $this->input->post('realm'); 
 		
 		// Make sure the realm actually supports console commands
 		if (!$this->realms->getRealm($realmId)->getEmulator()->hasConsole())
 		{
-			die("relam does not support this service");
+			die(long("relamdoesnotsupport","playtime"));
 		}
 		
 		if ($characterGuid && $realmId)
 		{
 			
-				//The tool is valid
+				
 				$realmConnection = $this->realms->getRealm($realmId)->getCharacters();
 				$realmConnection->connect();
 
@@ -125,7 +110,7 @@ class Playtime extends MX_Controller
                      
                      {
 
-                     	die("Your character is online, please leave the game and try again");
+                     	die(long("LongCharacterOnline","playtime"));
 
                      }
 				
@@ -137,13 +122,13 @@ class Playtime extends MX_Controller
 				// Make sure the character exists
 				if (!$realmConnection->characterExists($characterGuid))
 				{
-					die("هThere is no selected character");
+					die(long("noselectedcharacter","playtime"));
 				}
 
 				// Make sure the character belongs to this account
 				if (!$realmConnection->characterBelongsToAccount($characterGuid, $this->user->getId()))
 				{
-					die("The selected character does not belong to your account");
+					die(long("notcharacteryouraccount","playtime"));
 				}
 				
 				//Get the character name
@@ -152,23 +137,16 @@ class Playtime extends MX_Controller
 				//Make sure we've got the name
 				if (!$CharacterName)
 				{
-					die("The site is unable to display your character's name");
+					die(long("unablecharactername","playtime"));
 				}
-				
-			        
-
-					
 					if ($this->checktotaltime($CharacterName,$realmId))
                      
                      {
-                     	   if ($PriceCurrency == 'dp')
+                     	   if ($PriceCurrency == 'DP')
 	                           	{
 			          
 			 	                   $this->user->setDp($this->user->getDp() + $convert_Price);
 		                      	}
-		                    	
-                              
-                 
 					     	$this->Senditems($realmId,$characterGuid);
 
 					//Successful
@@ -177,7 +155,7 @@ class Playtime extends MX_Controller
                      else
 
                      {
-                              die("There is not enough playing time for this character");
+                              die(long("notenoughplaytimecharacter","playtime"));
 
                      }
 				
@@ -185,7 +163,7 @@ class Playtime extends MX_Controller
 		}
 		else
 		{
-			die("An error occurred, please try again...");
+			die(long("Theinputisinvalid","playtime"));
 		}
 	}
 	
@@ -280,13 +258,8 @@ class Playtime extends MX_Controller
 				        	{
 					          	return false;
 				           	}	
-
-	                	
 	                            
 	} 
-    
-    
-
 
 		public function changetotoaltime ($name,$realmid)
 
@@ -298,13 +271,8 @@ class Playtime extends MX_Controller
 			  $character_database->getConnection()->query("UPDATE characters SET totaltime = totaltime - '$convert' WHERE name = '$name' and online=0");
  
 		return true;
-			
-
-
 
 	} 
-
-
 
 public function checkcheckchar ($guid,$realmid)
 
@@ -326,20 +294,14 @@ public function checkcheckchar ($guid,$realmid)
 		                	return false;
 	                 	}  
 
-        }
-    
-    
-    
-    
+    }
     public function GeConvert($totaltime)
+		
    {
-
-
-
      if ($totaltime > 86400) 
      { 
                       $uptime =  round(($totaltime / 24 / 60 / 60),0)." Days";
-    }
+     }
             elseif($totaltime > 3600) 
             { 
                     $uptime =   round(($totaltime / 60 / 60),0)." Hours";
@@ -349,15 +311,8 @@ public function checkcheckchar ($guid,$realmid)
                   $uptime =  round(($totaltime / 60),0)." Minutes";
            }
 
-return $uptime;
-     
+    return $uptime;
 
-      
-       
-   
-
-
- 
 
   }
 	public function geticon($realm,$itemid)
@@ -372,11 +327,8 @@ return $uptime;
   
     return $this->getIconName($displayid);
   
-	//	return  file_get_contents($this->template->page_url."icon/get/".$realm."/".$itemid);
+
  }
- 
- 
- 
  
  private function getDisplayId($item, $realm)
     {
@@ -385,9 +337,6 @@ return $uptime;
 
         return $item['displayid'];
     }
-    
- 
-    
     
     private function getIconName($id)
     {
@@ -407,15 +356,10 @@ return $uptime;
 	
 	
 	public function GetQualityID($realmId,$entry,$data)
-  
-  
+ 
   {
-    	$WorldConnection = $this->realms->getRealm($realmId)->getWorld();
-           $WorldConnection->connect();
-           
-        //   $Quality =   $this->config->item('Quality');
-         //  $ItemLevel_access =   $this->config->item('ItemLevel_access');
-           
+         	$WorldConnection = $this->realms->getRealm($realmId)->getWorld();
+            $WorldConnection->connect();
 
             $query =$WorldConnection->getConnection()->query("SELECT * FROM `item_template` WHERE `entry` = ?  ",array($entry));
 
@@ -432,12 +376,5 @@ return $uptime;
             return false;
     
   }
-	
-
-
 
 }
-
-
-
-                            
