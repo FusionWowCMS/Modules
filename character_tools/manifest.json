@@ -1,0 +1,27 @@
+{
+	"name": "Character Tools 2",
+	"description": "Enables your users to use blizzlike character tools.",
+	"version": "2.0.0",
+	"date": "2023-06-05",
+	"min_required_version": "8.0.0",
+	"author": {
+		"name": "Keramat Jokar",
+		"website": ""
+	},
+	
+	"permissions": {
+		"view": {"default" : true, "description": "View the character tools screen." }
+	},
+
+	"roles": {
+		"view": {
+			"description": "View the character tools module.",
+			
+			"permissions": {
+				"view": true
+			}
+		}
+	},
+
+	"enabled": true
+}
