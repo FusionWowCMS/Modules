@@ -3,10 +3,6 @@
 class Levelup extends MX_Controller 
 {
 	private $characters;
-	private $total;
-    
-
-	
 
 	public function __construct()
 	{
@@ -14,17 +10,11 @@ class Levelup extends MX_Controller
 
 		$this->user->userArea();
 		
-		$this->load->config('character_tools');
+		$this->load->config('config');
         
-        $this->language = $this->config->item('cta_language');
-
-		//Init the variables
 		$this->init();
 	}
 
-	/**
-	 * Init every variable
-	 */
 	private function init()
 	{
 		$this->characters = $this->user->getCharacters($this->user->getId());
@@ -51,13 +41,6 @@ class Levelup extends MX_Controller
 			}
 		}
 	}
-	
-    
-    
-    
-	/**
-	 * Load the page
-	 */
 	public function index()
 	{
 		requirePermission("view");
@@ -69,7 +52,7 @@ class Levelup extends MX_Controller
 		clientLang("levelup1", "levelup");
 		
 		//Set the title
-		$this->template->setTitle($this->config->item("T_M"));
+		$this->template->setTitle(long("LevelUP","levelup"));
 			
 		//Load the content
 		$content_data = array(
@@ -81,23 +64,20 @@ class Levelup extends MX_Controller
             "Emulator" => $this,
 		);
 		
-		$page_content = $this->template->loadPage("character_tools.tpl", $content_data);	
+		$page_content = $this->template->loadPage("levelup.tpl", $content_data);	
 		
 		//Load the page
 		$page_data = array(
 			"module" => "default", 
-			"headline" => $this->config->item("T_M"), 
+			"headline" => long("LevelUP","levelup"), 
 			"content" => $page_content
 		);
 		
 		$page = $this->template->loadPage("page.tpl", $page_data);
 		
-		$this->template->view($page, "modules/levelup/css/character_tools.css", "modules/levelup/js/character_tools.js");
+		$this->template->view($page, "modules/levelup/css/levelup.css", "modules/levelup/js/levelup.js");
 	}
 	
-	/**
-	 * Submit method
-	 */
 	public function submit()
 	{
 	
@@ -108,7 +88,7 @@ class Levelup extends MX_Controller
 		// Make sure the realm actually supports console commands
 		if (!$this->realms->getRealm($realmId)->getEmulator()->hasConsole())
 		{
-			die($this->language['realmdoesnotsupport']);
+			die(lang('realmdoesnotsupport', "levelup"));
 		}
 		
 		if ($characterGuid && $realmId)
@@ -123,7 +103,9 @@ class Levelup extends MX_Controller
                      
                      {
 
-                     	die($this->language['characterisonline']);
+                     	
+					
+					die(lang('realmdoesnotsupport', "levelup"));
 
                      }
                      
@@ -134,13 +116,15 @@ class Levelup extends MX_Controller
 				// Make sure the character exists
 				if (!$realmConnection->characterExists($characterGuid))
 				{
-					die($this->language['characterdoesnotexist']);
+					
+					die(lang('characterdoesnotexist', "levelup"));
 				}
 
 				// Make sure the character belongs to this account
 				if (!$realmConnection->characterBelongsToAccount($characterGuid, $this->user->getId()))
 				{
-					die($this->language['youraccount']);
+				
+					die(lang('youraccount', "levelup"));
 				}
 				
 				//Get the character name
@@ -149,14 +133,18 @@ class Levelup extends MX_Controller
 				//Make sure we've got the name
 				if (!$CharacterName)
 				{
-					die($this->language['resolveyourcharactersname']);
+					
+					
+						die(lang('resolveyourcharactersname', "levelup"));
 				}
 				
 					$command = $this->GetCommand($realmId, $CharacterName);
 					
 					if (!$command)
 					{
-						die($this->language['notsupporttheservice']);
+					
+						
+						die(lang('notsupporttheservice', "levelup"));
 					}
 					
 					
@@ -185,7 +173,9 @@ class Levelup extends MX_Controller
 		}
 		else
 		{
-			die($this->language['Somethingwentwrong']);
+			
+			
+			die(lang('Somethingwentwrong', "levelup"));
 		}
 	}
 	
@@ -206,42 +196,26 @@ class Levelup extends MX_Controller
 		{
 			case "trinity":
 			case "azerothcore":
-                return ".char level " . $CharacterName." 80";
+				
+                   return ".char level " . $CharacterName." ".$server_max_core;
+				
 			case "trinity_cata":
-                return ".char level " . $CharacterName." 85";
+				
+                   return ".char level " . $CharacterName." ".$server_max_core;
+				
 			case "skyfire":
 			case "arkcore":
 			case "mangos":
 			case "mangosr2":
-			//	return ".char level admin 85";//;.$server_max_core;
-				return ".char level " . $CharacterName." ".$server_max_core;
+				
+                   return ".char level " . $CharacterName." ".$server_max_core;
 		}
 		
 		return false;
 	}
     
     
-    public function getEmulator($realmId)
-	{
-		
 
-		switch ($this->getEmulatorString($realmId))
-		{
-			case "trinity":
-            case "skyfire":
-                return 80;
-			case "trinity_cata":
-                return 85;  
-			case "arkcore":
-			case "mangos":
-			case "mangosr2":
-			return 70;
-		}
-		
-	
-	}
-    
-    
 	
 	private function getEmulatorString($realmId)
 	{
