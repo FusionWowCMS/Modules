@@ -2,14 +2,10 @@
 
 class data_model extends CI_Model
 {
-	
-
-
 
 public function GetCountAccount($realmId = 1)
   {
-
-    
+ 
     $character_database = $this->realms->getRealm($realmId)->getCharacters();
     $character_database->connect();
    
@@ -43,10 +39,6 @@ public function GetCountAccount($realmId = 1)
       return false;
     }
   }
-
-
- 
-  
 
    public function Getavator($character)
 
@@ -100,26 +92,10 @@ public function GetCountAccount($realmId = 1)
         $result[0] = $copper;
         $result[1] = $silver;
         $result[2] = $gold;
-        
-        
-        
-     ///   return $result[1].'<img src="'.$this->template->page_url.'application/modules/goldtpdp/img/money-silver.gif" align="absmiddle"  height="12" width="12"/>'.$result[0].'<img /src="'.$this->template->page_url.'application/modules/goldtpdp/img/money-copper.gif" align="absmiddle"  height="12" width="12"/>' ;                    
+                   
 
         return $result[2];
     }
    
-
-	
-	
-
-
-   
- 
-
-
-  
-
-
-
 
 }

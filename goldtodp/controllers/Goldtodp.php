@@ -23,57 +23,16 @@
 		$this->load->config('config');
         $this->load->model('data_model');
 	
-		$this->language = $this->config->item('cta_language');
-				requirePermission("view");
-
-		$this->FormatLanguage();
-		
-		if ($this->user->getAccountStatus() != 'Active')
-		{
-		  
-        
-		  
-			$this->BannedPage();
-			die;
-		}
-  
-		//Init the variables
-		//$this->init();
+	
 	}
     
     
-    
-	private function BannedPage()
-	{
-		$this->template->setTitle("An error occured!");
-
-		$data = array(
-			"module" => "default", 
-			"headline" => 'An error occured!', 
-			"content" => "<center style='margin:10px;font-weight:bold;'>" . (isset($this->language['BANNED_MSG']) ? $this->language['BANNED_MSG'] : 'Your account is banned!') . "</center>"
-		);
-
-		$page = $this->template->loadPage("page.tpl", $data);
-
-		$this->template->view($page);
-	}
-	private function FormatLanguage()
-	{
-		$PriceCurrency = ($this->config->item('cta_price_currency') == 'dp') ? $this->language['DP'] : $this->language['VP'];
-		$this->language['COST_EXPL'] = str_replace(array('[PRICE]', '[CURRENCY]'), array($this->config->item('cta_price'), $PriceCurrency), $this->language['COST_EXPL']);
-		
-		$this->language['ERROR_CHAR_LIMIT'] = str_replace('[LIMIT]', $this->config->item('cta_characters_limit'), $this->language['ERROR_CHAR_LIMIT']);
-	}
-
-
-
-
 	public function index()
 	{
 		requirePermission("view");
-//die($this->restore_model->Getdataitems_pricearray());
 
-		$this->template->setTitle($this->language['TITLE']);
+
+		$this->template->setTitle($this->lang('TITLE','goldtodp'));
 
 	
 			// Prepare data
@@ -88,7 +47,7 @@
 			// Load the topsite page and format the page contents
 			$data2 = array(
 				"module" => "default", 
-				"headline" => $this->language['TITLE'], 
+				"headline" => $this->lang('TITLE','goldtodp'), 
 				"content" => $ajax
 			);
 
@@ -100,19 +59,14 @@
 
 	public function Load()
 	{
-	///	requirePermission("view");
-
-
-		//Load the content
 		$content_data = array(
 		
-			"url" => $this->template->page_url,
-			"dp" => $this->user->getDp(),			
-			"config" => $this->config,
-			"result" =>$this,
-			"realms" => $this->realms->getRealms(),
-            "Character_Banned"	=> $this->config->item('Character_Banned'),
-			"Server_fee"=> $this->config->item('Server_fee')
+			"url"               => $this->template->page_url,
+			"dp"                => $this->user->getDp(),			
+			"config"            => $this->config,
+			"this"              => $this,
+			"realms"            => $this->realms->getRealms(),
+			"Server_fee"        => $this->config->item('Server_fee')
 			
 		);
 		
@@ -121,7 +75,7 @@
 		//Load the page
 		$page_data = array(
 			"module" => "default", 
-			"headline" => $this->language['TITLE'], 
+			"headline" => $this->lang('TITLE','goldtodp'), 
 			"content" => $page_content
 		);
 		
@@ -135,16 +89,11 @@
       	{
       	 
          
-    $Price = (int)$this->config->item('Server_fee');
-    $PriceCurrency = $this->config->item('price_currency');
-         
-         
-       
+        $Price = (int)$this->config->item('Server_fee');
+        $PriceCurrency = $this->config->item('price_currency');
 		$characterGuid = $this->input->post('guid'); 
 		$realmId = $this->input->post('realm'); 
-         
-        $CostBarGold = $this->input->post('cost'); 
-         
+        $CostBarGold = $this->input->post('cost');         
         $GoldCharacter =   $this->data_model->getmoneychar($realmId,$characterGuid);
         
             
@@ -152,7 +101,7 @@
                      
                      {
 
-                     	die("Your character is online, please leave the game and try again");
+                     	die(long("LongCharacterOnline","goldtodp"));
 
                      }
          
@@ -160,19 +109,15 @@
                      
                      {
 
-                     	die("Gold conversion below 1000 is not allowed ");
+                     	die(long("conversionbelow","goldtodp"));
 
                      }
          
-       
-
-         
-            
            if ($CostBarGold > $GoldCharacter)
                      
                      {
 
-                     	die("Gold Character is not allowed ");
+                     	die(long("Gold_Character_not_allowed","goldtodp"));
 
                      }
                           else
@@ -185,7 +130,7 @@
                                                 {
 				                                    if ($this->user->getDp() < $Price)
 				                                          {
-					                                            die($this->language['ERROR_PRICE_DP']);
+					                                            die($this->lang('ERROR_PRICE_DP','goldtodp'));
 				                                          }                          
 			                                    }
                                          $this->user->setDp($this->user->getDp() - $Price);
@@ -208,19 +153,12 @@
              
                              }
      
-       
          } 
-    
-    
-    
-    
     
     public function CheckCharOnline ($guid,$realmid)
 
 	{
                
-        
-        
 			$character_database = $this->realms->getRealm($realmid)->getCharacters();
 	    	$character_database->connect();
 			$query = $character_database->getConnection()->query("SELECT * FROM characters WHERE guid = ? and  online=0", array($guid));  
@@ -238,39 +176,25 @@
 	                 	}  
 
         }
-         
-
-    
-    
     	public function ChangeGoldCharacter ($guid,$realmid,$money)
 
-	{
+	    {
             
-            
-            
-   $money  = $money * 10000;
-            
-		
 
+            $money  = $money * 10000;
 			$character_database = $this->realms->getRealm($realmid)->getCharacters();
 	    	$character_database->connect();
-             $query =  $character_database->getConnection()->query("UPDATE characters SET money = money - '$money' WHERE guid = ?",array($guid));
+            $query =  $character_database->getConnection()->query("UPDATE characters SET money = money - '$money' WHERE guid = ?",array($guid));
             
             
              if($query)
-		                {
+		               
+              return true;
 
-                                return true;
-	                    }
+	         else
+	                 	
+		      return false;
+	                 	
 
-
-	                  else
-	                 	{
-		                	return false;
-	                 	} 
-
-	} 
-	
-  
-
+	    } 
 }

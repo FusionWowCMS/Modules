@@ -69,17 +69,10 @@ selectCharacter: function(button, realm, guid, name,goldchar)
        {
         
         var CanAfford = false;
-        
-           
-        
         var GoldBarCharacter = document.getElementById("goldbar").value;
-           
-       //  UI.alert(GoldBarCharacter);
-           
-       	//Check if we have selected character
+
 		if (CharacterClass.Character.guid == null && CharacterClass.Character.realm == null )
 		{
-			
 			
 			Swal.fire({
 						icon:  'error',
@@ -141,17 +134,13 @@ selectCharacter: function(button, realm, guid, name,goldchar)
 			if (data == 1)
 			 
              {
-                   
-                 
-				 
 				 	Swal.fire({
 						icon:  'seccess',
 						title: 'Gold to DP',
 						text:  'The conversion operation was successful',
 					})
                       
-				 
-				               setTimeout ( "redirect('goldtodp')", 1000 );	
+				        setTimeout ( "redirect('goldtodp')", 1000 );	
                 
              }
              
@@ -168,11 +157,7 @@ selectCharacter: function(button, realm, guid, name,goldchar)
                  $(button).parents(".select_tool").addClass("active_tool");
 		         $(button).html('Gold conversion');
                  
-               }
-               
-              
-
-				
+               }	
        });
        
      }     
