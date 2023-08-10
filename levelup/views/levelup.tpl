@@ -1,111 +1,108 @@
 <script type="text/javascript">
-	$(document).ready(function()
-	{
-		function initializeCharacterTools()
-		{
-			if(typeof CharacterTools != "undefined")
-			{
-				CharacterTools.User.initialize({$dp});
-			}
-			else
-			{
-				setTimeout(initializeCharacterTools, 50);
-			}
-		}
+    $(document).ready(function () {
+        function initializeCharacterTools() {
+            if (typeof CharacterTools != "undefined") {
+                CharacterTools.User.initialize({$dp});
+            } else {
+                setTimeout(initializeCharacterTools, 50);
+            }
+        }
 
-		initializeCharacterTools();
-	});
+        initializeCharacterTools();
+    });
 </script>
-   
+
 <center>
-     <div style="padding: 8px 35px 8px 14px; margin-bottom: 20px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); background-color: #0c2d05; border: 1px solid #FF006A; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;">
-              <div style="text-align: right;">
+    <div style="padding: 8px 35px 8px 14px; margin-bottom: 20px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); background-color: #0c2d05; border: 1px solid #FF006A; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;">
+        <div style="text-align: right;">
 				  <span style="color: blue;">
 					  <span style="font-family: tahoma,geneva,sans-serif;">
 						  <span style="font-size: 12px;">
 						  </span>
 					  </span>
 				  </span>
-		      </div>
-              <div style="text-align: right;"></div>
-              <div style="text-align: left;">{lang("alert1", "levelup")}</div>
-	</div>
+        </div>
+        <div style="text-align: right;"></div>
+        <div style="text-align: left;">{lang("alert1", "levelup")}</div>
+    </div>
 </center>
 
 <center>
-        <div style="padding: 8px 35px 8px 14px; margin-bottom: 20px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); background-color: #131b10; border: 1px solid #FF006A; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;">
-                <div style="text-align: right;">
+    <div style="padding: 8px 35px 8px 14px; margin-bottom: 20px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); background-color: #131b10; border: 1px solid #FF006A; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;">
+        <div style="text-align: right;">
 					<span style="color: blue;">
 						<span style="font-family: tahoma,geneva,sans-serif;">
 							<span style="font-size: 12px;"></span>
 						</span>
 					</span>
-			    </div>
-                <div style="text-align: right;"></div>
-                <div style="text-align: left;font-size: 14px"> 
-	                {lang("Server_fee", "levelup")} 
-                       {if $config->item('lvlup_change') > 0} 
-					
-	                <img src="{$url}application/images/icons/coins_add.png" align="absmiddle" height="12" width="12"/>
-	                            {lang("dp", "levelup")}  {$config->item('Server_fee')} 
-                            {else}
-	                            {lang("free1", "levelup")}
-                            {/if}  
-               </div>
-		</div>
-</center>       
+        </div>
+        <div style="text-align: right;"></div>
+        <div style="text-align: left;font-size: 14px">
+            {lang("Server_fee", "levelup")}
+            {if $config->item('lvlup_change') > 0}
+                <img src="{$url}application/images/icons/coins_add.png" align="absmiddle" height="12" width="12"/>
+                {lang("dp", "levelup")}  {$config->item('Server_fee')}
+            {else}
+                {lang("free1", "levelup")}
+            {/if}
+        </div>
+    </div>
+</center>
 <section id="character_tools">
-	<section id="select_character">
-		<div class="online_realm_button"></div>
-		
-		{if $total}
-			{foreach from=$characters item=realm}
-          
-				{foreach from=$realm.characters item=character}
-                 {if $character.online==0}
-                
-					<div class="select_character">
-						<div class="character store_item">
-							<section class="character_buttons">
-								<a href="javascript:void(0)" class="nice_button" onClick="CharacterTools.selectCharacter(this, {$realm.realmId}, {$character.guid})">
-									{lang("select", "levelup")}
-								</a>
-							</section>
-			
-							<img class="item_icon" width="45" height="45" src="{$url}application/images/avatars/{$character.avatar}.gif" align="absmiddle" data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">
-			
-							<a class="character_name" data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">{$character.name}</a>
-							
-                            
-                         <div style="margin-top: -22px;margin-left:60px">  Level {$character.level}</div>   
-							<div class="clear"></div>
-						</div>
-					</div>
+    <section id="select_character">
+        <div class="online_realm_button"></div>
+
+        {if $total}
+            {foreach from=$characters item=realm}
+
+                {foreach from=$realm.characters item=character}
+                    {if $character.online==0}
+                        <div class="select_character">
+                            <div class="character store_item">
+                                <section class="character_buttons">
+                                    <a href="javascript:void(0)" class="nice_button"
+                                       onClick="CharacterTools.selectCharacter(this, {$realm.realmId}, {$character.guid})">
+                                        {lang("select", "levelup")}
+                                    </a>
+                                </section>
+
+                                <img class="item_icon" width="45" height="45"
+                                     src="{$url}application/images/avatars/{$character.avatar}.gif" align="absmiddle"
+                                     data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">
+
+                                <a class="character_name"
+                                   data-tip="<img src='{$url}application/images/stats/{$character.class}.gif' align='absbottom'/> {$character.name} (Lv{$character.level})">{$character.name}</a>
+
+
+                                <div style="margin-top: -22px;margin-left:60px"> Level {$character.level}</div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
                     {/if}
-                   
-				{/foreach}
-			{/foreach}
-		{else}
-			<center style="padding-top:10px;"><b>{lang("no_chars", "levelup")}</b></center>
-		{/if}
-	</section>
-    
-	<section id="select_tool">
-    	<div class="online_realm_button"></div>
+
+                {/foreach}
+            {/foreach}
+        {else}
+            <center style="padding-top:10px;"><b>{lang("no_chars", "levelup")}</b></center>
+        {/if}
+    </section>
+
+    <section id="select_tool">
+        <div class="online_realm_button"></div>
         <div class="select_tools">
             <div class="select_tool">
                 <div class="tool store_item">
                     <section class="tool_buttons">
                         <a href="javascript:void(0)" class="nice_button" onClick="CharacterTools.Purchase(this, 1)">
-                              {lang("levelup1", "levelup")}
+                            {lang("levelup1", "levelup")}
                         </a>
-                    </section>     
-                    
+                    </section>
+
                     <div class="clear"></div>
                 </div>
             </div>
         </div>
-		<div class="clear"></div>
-	</section>
-	<div class="clear"></div>
+        <div class="clear"></div>
+    </section>
+    <div class="clear"></div>
 </section>
