@@ -222,6 +222,7 @@ class Character_tools extends MX_Controller
             case 'trinity_legion':
             case 'trinity_rbac_sl':
             case 'trinity_rbac':
+            case 'vmangos':
                 return '.character rename ' . $CharacterName;
         }
 
@@ -242,6 +243,7 @@ class Character_tools extends MX_Controller
             case 'trinity_legion':
             case 'trinity_rbac_sl':
             case 'trinity_rbac':
+            case 'vmangos':
                 return '.character changerace ' . $CharacterName;
         }
 
@@ -302,6 +304,7 @@ class Character_tools extends MX_Controller
             case 'trinity_legion':
             case 'trinity_rbac_sl':
             case 'trinity_rbac':
+            case 'vmangos':
                 return '.revive ' . $CharacterName;
         }
 
@@ -323,6 +326,7 @@ class Character_tools extends MX_Controller
             case 'trinity_legion':
             case 'trinity_rbac_sl':
             case 'trinity_rbac':
+            case 'vmangos':
                 return '.char level ' . $CharacterName . ' ' . $level;
         }
 
