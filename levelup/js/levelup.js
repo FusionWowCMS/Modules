@@ -84,16 +84,6 @@ var CharacterTools = {
 			  	}
 			});
 			
-            
-          //  UI.alert(lang("p_w", "levelup")) ;
-			
-			Swal.fire({
-						icon: 'error',
-						title: 'Levelup',
-						text: lang("p_w", "levelup"),
-					})
-			
-			
 			// Execute the service
 			$.post(Config.URL + "levelup/submit", 
 			{
@@ -106,8 +96,7 @@ var CharacterTools = {
 			{
 				CharacterTools.IsLoading = false;
 				
-				if (data == 1)
-				{
+				if (data == "1"){
 					
 					Swal.fire({
 						icon: 'seccess',
@@ -116,17 +105,13 @@ var CharacterTools = {
 					})
 					
 
-             window.location = "/levelup";	
-				}
-				else
-				{
+                          window.location = "/levelup";	
+				} else {
 					Swal.fire({
 						icon: 'error',
 						title: 'Levelup',
 						text: data,
-					})
-					
-					
+					})	
 				}
 				
 				

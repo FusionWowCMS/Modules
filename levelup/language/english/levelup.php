@@ -1,7 +1,7 @@
 <?php
 
 $lang['select_s1'] = "select service";
-$lang['alert1'] = "Note: Only online characters will be displayed";
+$lang['alert1'] = "Note: Only offline characters will be displayed";
 $lang['upgrate'] = "Upgrade Character";
 $lang['change_n'] = "Change the name of the selected hero";
 $lang['hmmm'] = "Cost :";
@@ -14,11 +14,12 @@ $lang['seccess'] = "The upgrade was successful";
 $lang['no_select'] = "Please select a character";
 $lang['select'] = "Select";
 $lang['selected'] = "selected";
-$lang['p_w'] = "...please be patient";
+$lang['p_w'] = "...pleasa be patient";
 $lang['no_cost'] = "Your balance is not enough";
 $lang['cant_afford'] = "You can't afford this!";
 $lang['Server_fee'] = "Server fee";
 $lang['TITLE'] = "LevelUP";
+$lang['LevelUP'] = "levelup";
 
 $lang['realmdoesnotsupport']	    = 'The realm does not support that service.';
 $lang['characterisonline']          = 'Your character is online, please leave the game and try again';
