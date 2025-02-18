@@ -50,8 +50,6 @@ var CharacterTools = {
 			case 2: return "Race Change";
 			case 3: return "Faction Change";
 			case 4: return "Appearance Change";
-			case 5: return "Revive";
-			case 6: return "Level Up";
 		}
 		
 		return "Unknown";

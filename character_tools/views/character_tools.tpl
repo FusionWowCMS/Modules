@@ -168,48 +168,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Revive -->
-                                <div class="select_tool">
-                                    <div class="tool store_item">
-                                        <section class="tool_buttons">
-                                            <a href="javascript:void(0)" class="nice_button"
-                                               onClick="CharacterTools.buy(this, 5, {$config->item('revive_change_price')})">
-                                                Purchase
-                                            </a>
-                                        </section>
-
-                                        <img class="item_icon" data-tip="Brings a dead player back to life"
-                                             src="{$url}application/modules/character_tools/css/images/spell_holy_resurrection.jpg"
-                                             width="36" height="36" src="" align="absmiddle">
-
-                                        <a class="tool_name" data-tip="Brings a dead player back to life">Revive</a>
-                                        <br/>
-                                        {if $config->item('revive_change_price') > 0}Cost: {$config->item('revive_change_price')} Donation Points{else}Free of charge{/if}
-                                        <div class="clear"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Level Up -->
-                                <div class="select_tool">
-                                    <div class="tool store_item">
-                                        <section class="tool_buttons">
-                                            <a href="javascript:void(0)" class="nice_button"
-                                               onClick="CharacterTools.buy(this, 6, {$config->item('levelup_change_price')})">
-                                                Purchase
-                                            </a>
-                                        </section>
-
-                                        <img class="item_icon" data-tip="Level Up character"
-                                             src="{$url}application/modules/character_tools/css/images/spell_holy_innerfire.jpg"
-                                             width="36" height="36" src="" align="absmiddle">
-
-                                        <a class="tool_name" data-tip="Level Up character">Level Up</a>
-                                        <br/>
-                                        {if $config->item('levelup_change_price') > 0}Cost: {$config->item('levelup_change_price')} Donation Points{else}Free of charge{/if}
-                                        <div class="clear"></div>
-                                    </div>
-                                </div>
-
                                 <div class="clear"></div>
                             </div>
                             <div class="clear"></div>

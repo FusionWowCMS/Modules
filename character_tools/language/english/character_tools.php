@@ -41,5 +41,3 @@ $lang['faction'] = "Change Faction";
 $lang['faction_t'] = "Change a character’s faction (Horde to Alliance or Alliance to Horde)";
 $lang['appearance'] = "Appearance Change";
 $lang['appearance_t'] = "Change your characters’ appearance (optional name change included)";
-$lang['revive'] = "Revive";
-$lang['unstuck'] = "Unstuck";

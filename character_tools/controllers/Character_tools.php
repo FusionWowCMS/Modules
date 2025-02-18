@@ -7,22 +7,12 @@ class Character_tools extends MX_Controller
     private $characters;
     private $total;
 
-    private $tools = array(
+    private $tools = [
         1 => "name_change",
         2 => "race_change",
         3 => "faction_change",
         4 => "appearance_change",
-        5 => "revive_change",
-        6 => "levelup_change",
-    );
-
-    private $gps = array(
-        'mapId' => 571,
-        'orientation' => 1.64,
-        'posX' => 5804.15,
-        'posY' => 624.771,
-        'posZ' => 647.767
-    );
+    ];
 
     public function __construct()
     {
@@ -32,9 +22,6 @@ class Character_tools extends MX_Controller
 
         //Load the Config
         $this->load->config('character_tools');
-
-        //Load the models
-        $this->load->model('character_tools_model');
 
         //Init the variables
         $this->init();
@@ -92,11 +79,11 @@ class Character_tools extends MX_Controller
         $page_content = $this->template->loadPage("character_tools.tpl", $content_data);
 
         //Load the page
-        $page_data = array(
+        $page_data = [
             "module" => "default",
             "headline" => "Character Tools",
             "content" => $page_content
-        );
+        ];
 
         $page = $this->template->loadPage("page.tpl", $page_data);
 
@@ -133,15 +120,6 @@ class Character_tools extends MX_Controller
                     die("The selected character does not exist.");
                 }
 
-                // Revive check
-                if ($ToolId == 5) {
-                    //MAKE SURE THAT THE CHARACTER EXISTS AND THAT HE IS OFFLINE, ALSO MAKE SURE WE CAN AFFORD IT
-                    $character_exists = $this->character_tools_model->characterExists($characterGuid, $realmConnection->getConnection());
-                    if (!$character_exists) {
-                        die(lang("must_be_offline", "character_tools"));
-                    }
-                }
-
                 // Make sure the character belongs to this account
                 if (!$realmConnection->characterBelongsToAccount($characterGuid, $this->user->getId())) {
                     die("The selected character does not belong to your account.");
@@ -158,7 +136,7 @@ class Character_tools extends MX_Controller
                 //Check if the user can afford the service
                 if ($this->user->getDp() >= $Price || $Price == 0) {
                     //Get the command for this emulator
-                    $command = $this->GetCommand($ToolId, $realmId, $CharacterName);
+                    $command = $this->GetCommand($ToolId, $CharacterName);
 
                     if (!$command) {
                         die("The realm does not support that service.");
@@ -166,10 +144,6 @@ class Character_tools extends MX_Controller
 
                     //Execute the command
                     $this->realms->getRealm($realmId)->getEmulator()->sendCommand($command);
-
-                    //Change the location of our user
-                    if ($ToolId == 5)
-                        $this->character_tools_model->setLocation($this->gps['posX'], $this->gps['posY'], $this->gps['posZ'], $this->gps['orientation'], $this->gps['mapId'], $characterGuid, $realmConnection->getConnection());
 
                     //Update Donation Points
                     if ($Price > 0) {
@@ -189,154 +163,20 @@ class Character_tools extends MX_Controller
         }
     }
 
-    private function GetCommand($ToolId, $realmId, $CharacterName)
+    private function GetCommand($ToolId, $CharacterName)
     {
         //Start by switching the tool id
         switch ($this->tools[$ToolId]) {
             case 'name_change':
-                return $this->GetNameCommand($realmId, $CharacterName);
-            case 'race_change':
-                return $this->GetRaceCommand($realmId, $CharacterName);
-            case 'faction_change':
-                return $this->GetFactionCommand($realmId, $CharacterName);
-            case 'appearance_change':
-                return $this->GetAppearanceCommand($realmId, $CharacterName);
-            case 'revive_change':
-                return $this->GetReviveCommand($realmId, $CharacterName);
-            case 'levelup_change':
-                return $this->GetLevelUpCommand($realmId, $CharacterName);
-        }
-
-        return false;
-    }
-
-    private function GetNameCommand($realmId, $CharacterName)
-    {
-        switch ($this->getEmulatorString($realmId)) {
-            case 'azerothcore':
-            case 'azerothcore_sph':
-            case 'cmangos':
-            case 'mangos_one_two_sph':
-            case 'mangos_three_sph':
-            case 'mangos_zero_sph':
-            case 'mop':
-            case 'mop_yekta':
-            case 'trinity_legion':
-            case 'trinity_rbac_sl':
-            case 'trinity_rbac':
-            case 'vmangos':
                 return '.character rename ' . $CharacterName;
-        }
-
-        return false;
-    }
-
-    private function GetRaceCommand($realmId, $CharacterName)
-    {
-        switch ($this->getEmulatorString($realmId)) {
-            case 'azerothcore':
-            case 'azerothcore_sph':
-            case 'cmangos':
-            case 'mangos_one_two_sph':
-            case 'mangos_three_sph':
-            case 'mangos_zero_sph':
-            case 'mop':
-            case 'mop_yekta':
-            case 'trinity_legion':
-            case 'trinity_rbac_sl':
-            case 'trinity_rbac':
-            case 'vmangos':
+            case 'race_change':
                 return '.character changerace ' . $CharacterName;
-        }
-
-        return false;
-    }
-
-    private function GetFactionCommand($realmId, $CharacterName)
-    {
-        switch ($this->getEmulatorString($realmId)) {
-            case 'azerothcore':
-            case 'azerothcore_sph':
-            case 'cmangos':
-            case 'mangos_one_two_sph':
-            case 'mangos_three_sph':
-            case 'mangos_zero_sph':
-            case 'mop':
-            case 'mop_yekta':
-            case 'trinity_legion':
-            case 'trinity_rbac_sl':
-            case 'trinity_rbac':
+            case 'faction_change':
                 return '.character changefaction ' . $CharacterName;
-        }
-
-        return false;
-    }
-
-    private function GetAppearanceCommand($realmId, $CharacterName)
-    {
-        switch ($this->getEmulatorString($realmId)) {
-            case 'azerothcore':
-            case 'azerothcore_sph':
-            case 'cmangos':
-            case 'mangos_one_two_sph':
-            case 'mangos_three_sph':
-            case 'mangos_zero_sph':
-            case 'mop':
-            case 'mop_yekta':
-            case 'trinity_legion':
-            case 'trinity_rbac_sl':
-            case 'trinity_rbac':
+            case 'appearance_change':
                 return '.character customize ' . $CharacterName;
         }
 
         return false;
-    }
-
-    private function GetReviveCommand($realmId, $CharacterName)
-    {
-        switch ($this->getEmulatorString($realmId)) {
-            case 'azerothcore':
-            case 'azerothcore_sph':
-            case 'cmangos':
-            case 'mangos_one_two_sph':
-            case 'mangos_three_sph':
-            case 'mangos_zero_sph':
-            case 'mop':
-            case 'mop_yekta':
-            case 'trinity_legion':
-            case 'trinity_rbac_sl':
-            case 'trinity_rbac':
-            case 'vmangos':
-                return '.revive ' . $CharacterName;
-        }
-
-        return false;
-    }
-
-    private function GetLevelUpCommand($realmId, $CharacterName)
-    {
-        $level = $this->config->item("max_level");
-        switch ($this->getEmulatorString($realmId)) {
-            case 'azerothcore':
-            case 'azerothcore_sph':
-            case 'cmangos':
-            case 'mangos_one_two_sph':
-            case 'mangos_three_sph':
-            case 'mangos_zero_sph':
-            case 'mop':
-            case 'mop_yekta':
-            case 'trinity_legion':
-            case 'trinity_rbac_sl':
-            case 'trinity_rbac':
-            case 'vmangos':
-                return '.char level ' . $CharacterName . ' ' . $level;
-        }
-
-        return false;
-    }
-
-    private function getEmulatorString($realmId)
-    {
-        return str_replace(array('_ra', '_soap', '_rbac'), '', $this->realms->getRealm($realmId)->getConfig('emulator'));
     }
 }
