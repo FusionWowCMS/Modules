@@ -1,5 +1,7 @@
 <?php
 
+use MX\MX_Controller;
+
 class Character_tools extends MX_Controller
 {
     private $characters;
